@@ -1,0 +1,32 @@
+@import "~bulma/sass/utilities/_all";
+$primary: hsl(242, 100%, 70%);
+$primary-invert: findColorInvert($primary);
+
+$info: hsl(337, 55%, 58%);
+$info-invert: findColorInvert($info);
+
+//$light: hsl(275, 20%, 83%);
+//$light-invert: findColorInvert($light);
+
+$link: hsl(242, 100%, 76%);
+$link-invert: findColorInvert($link);
+
+$link-hover: hsl(229, 19%, 66%);
+$link-focus: hsl(229, 19%, 66%);
+
+$breadcrumb-item-color: #fafafa;
+
+$colors: (
+    "white": ($white, $black),
+    "black": ($black, $white),
+    "link": ($link, $link-invert),
+    "light": ($light, $light-invert),
+    "dark": ($dark, $dark-invert),
+    "primary": ($primary, $primary-invert),
+    "info": ($info, $info-invert),
+    "success": ($success, $success-invert),
+    "warning": ($warning, $warning-invert),
+    "danger": ($danger, $danger-invert)
+);
+// The rest of Bulma
+@import '~bulma';
