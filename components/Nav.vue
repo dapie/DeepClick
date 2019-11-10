@@ -6,16 +6,16 @@
           <img src="~assets/logo.png" width="136">
         </nuxt-link>
 
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a role="button" class="navbar-burger burger is-active" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
 
-      <div id="navbarBasicExample" class="navbar-menu">
+      <div id="navbarBasicExample" class="navbar-menu is-active">
         <div class="navbar-start">
-          <nuxt-link to="/deeplinks"class="navbar-item">
+          <nuxt-link to="/deeplinks"class="navbar-item" v-if="$auth.loggedIn">
             Диплинки
           </nuxt-link>
 
@@ -27,22 +27,24 @@
             Поддержка
           </a>
         </div>
-        <div class="navbar-end">
+        <div class="navbar-end" v-if="$auth.loggedIn">
           <div class="navbar-item">
-            mytest@mail.ru
+            <a href="" class="navbar-item">{{$auth.user.email}}</a>
+            <a class="button is-primary is-outlined" @click="$auth.logout()">
+              Выход
+            </a>
           </div>
+        </div>
+        <div class="navbar-end" v-else>
           <div class="navbar-item">
-            <!-- <div class="buttons">
+            <div class="buttons">
               <a class="button is-primary" @click="$emit('openRegister')">
                 <strong>Регистрация</strong>
               </a>
-              <a class="button is-light" @click="$emit('openLogin')">
+              <nuxt-link class="button is-light" to="/login">
                 Вход
-              </a>
-            </div> -->
-            <a class="button is-primary is-outlined" @click="$emit('openLogin')">
-                Выход
-            </a>
+              </nuxt-link>
+            </div>
           </div>
         </div>
       </div>

@@ -153,7 +153,7 @@
 
           <div class="field is-grouped">
             <div class="control">
-              <button class="button is-link">Войти</button>
+              <button class="button is-link" @click="login()">Войти</button>
             </div>
           </div>
         </div>
@@ -174,6 +174,16 @@ export default {
     return{
       loginModalActive: false,
       registerModalActive: false
+    }
+  },
+  methods: {
+    login() {
+      this.$auth.loginWith('local', {
+        data: {
+          email: 'admin',
+          password: '123'
+        }
+      })
     }
   }
 }

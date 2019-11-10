@@ -12,6 +12,7 @@
           </h1>
           <h2 class="subtitle">
             Управление диплинками
+            {{this.$auth.user}}
           </h2>
           <a class="button is-primary">
             Создать диплинк
@@ -324,6 +325,7 @@
 import Nav from '~/components/Nav.vue'
 
 export default {
+  middleware: ['auth'],
   components: {
     Nav
   },
