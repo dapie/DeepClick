@@ -12,9 +12,8 @@
           </h1>
           <h2 class="subtitle">
             Управление диплинками
-            {{this.$auth.user}}
           </h2>
-          <a class="button is-primary">
+          <a class="button is-primary" @click="createModalActive = true">
             Создать диплинк
           </a>
         </div>
@@ -32,218 +31,27 @@
       <th>Действия</th>
     </tr>
   </thead>
-  <tfoot>
-    <tr>
-      <th>№</th>
-      <th>Название диплинка</th>
-      <th>Ссылки</th>
-      <th>Клики</th>
-      <th>Осталось кликов</th>
-      <th>Действия</th>
-    </tr>
-  </tfoot>
   <tbody>
-    <tr>
-      <th>1</th>
-      <td><p>Тестовое название</p><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://instagram.com/_dapie</a>
+    <tr v-for="link in links" :key="link.id">
+      <th>{{link.id}}</th>
+      <td>
+        <p>{{link.name}}</p>
+        <a :href="link.link">
+          {{link.link}}
+        </a>
       </td>
       <td>
         <p>Редирект через ссылку-прокладку:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/link/12345</a>
+        <a :href="'https://deepclick.com/link/' + link.id">
+          https://deepclick.com/link/{{link.id}}
+        </a>
         <p>Редирект напрямую:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/dlink/12345</a>
-      </td>
-      <td>10</td>
-      <td>190</td>
-      <td>
-        <a class="button is-primary">
-          Оплатить
-        </a>
-        <a class="button is-danger is-outlined">
-          Удалить
+        <a :href="'https://deepclick.com/dlink/' + link.id">
+          https://deepclick.com/dlink/{{link.id}}
         </a>
       </td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td><p>Тестовое название</p><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://instagram.com/_dapie</a>
-      </td>
-      <td>
-        <p>Редирект через ссылку-прокладку:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/link/12345</a>
-        <p>Редирект напрямую:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/dlink/12345</a>
-      </td>
-      <td>10</td>
-      <td>190</td>
-      <td>
-        <a class="button is-primary">
-          Оплатить
-        </a>
-        <a class="button is-danger is-outlined">
-          Удалить
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td><p>Тестовое название</p><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://instagram.com/_dapie</a>
-      </td>
-      <td>
-        <p>Редирект через ссылку-прокладку:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/link/12345</a>
-        <p>Редирект напрямую:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/dlink/12345</a>
-      </td>
-      <td>10</td>
-      <td>190</td>
-      <td>
-        <a class="button is-primary">
-          Оплатить
-        </a>
-        <a class="button is-danger is-outlined">
-          Удалить
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td><p>Тестовое название</p><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://instagram.com/_dapie</a>
-      </td>
-      <td>
-        <p>Редирект через ссылку-прокладку:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/link/12345</a>
-        <p>Редирект напрямую:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/dlink/12345</a>
-      </td>
-      <td>10</td>
-      <td>190</td>
-      <td>
-        <a class="button is-primary">
-          Оплатить
-        </a>
-        <a class="button is-danger is-outlined">
-          Удалить
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td><p>Тестовое название</p><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://instagram.com/_dapie</a>
-      </td>
-      <td>
-        <p>Редирект через ссылку-прокладку:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/link/12345</a>
-        <p>Редирект напрямую:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/dlink/12345</a>
-      </td>
-      <td>10</td>
-      <td>190</td>
-      <td>
-        <a class="button is-primary">
-          Оплатить
-        </a>
-        <a class="button is-danger is-outlined">
-          Удалить
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td><p>Тестовое название</p><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://instagram.com/_dapie</a>
-      </td>
-      <td>
-        <p>Редирект через ссылку-прокладку:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/link/12345</a>
-        <p>Редирект напрямую:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/dlink/12345</a>
-      </td>
-      <td>10</td>
-      <td>190</td>
-      <td>
-        <a class="button is-primary">
-          Оплатить
-        </a>
-        <a class="button is-danger is-outlined">
-          Удалить
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td><p>Тестовое название</p><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://instagram.com/_dapie</a>
-      </td>
-      <td>
-        <p>Редирект через ссылку-прокладку:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/link/12345</a>
-        <p>Редирект напрямую:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/dlink/12345</a>
-      </td>
-      <td>10</td>
-      <td>190</td>
-      <td>
-        <a class="button is-primary">
-          Оплатить
-        </a>
-        <a class="button is-danger is-outlined">
-          Удалить
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td><p>Тестовое название</p><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://instagram.com/_dapie</a>
-      </td>
-      <td>
-        <p>Редирект через ссылку-прокладку:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/link/12345</a>
-        <p>Редирект напрямую:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/dlink/12345</a>
-      </td>
-      <td>10</td>
-      <td>190</td>
-      <td>
-        <a class="button is-primary">
-          Оплатить
-        </a>
-        <a class="button is-danger is-outlined">
-          Удалить
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td><p>Тестовое название</p><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://instagram.com/_dapie</a>
-      </td>
-      <td>
-        <p>Редирект через ссылку-прокладку:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/link/12345</a>
-        <p>Редирект напрямую:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/dlink/12345</a>
-      </td>
-      <td>10</td>
-      <td>190</td>
-      <td>
-        <a class="button is-primary">
-          Оплатить
-        </a>
-        <a class="button is-danger is-outlined">
-          Удалить
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td><p>Тестовое название</p><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://instagram.com/_dapie</a>
-      </td>
-      <td>
-        <p>Редирект через ссылку-прокладку:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/link/12345</a>
-        <p>Редирект напрямую:</p>
-        <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">https://deepclick.com/dlink/12345</a>
-      </td>
-      <td>10</td>
-      <td>190</td>
+      <td>{{link.clicks}}</td>
+      <td>{{link.paidClicks}}</td>
       <td>
         <a class="button is-primary">
           Оплатить
@@ -255,8 +63,8 @@
     </tr>
   </tbody>
 </table>
-<div class="modal">
-      <div class="modal-background" @click="loginModalActive = false"></div>
+<div class="modal" :class="{'is-active': createModalActive}">
+      <div class="modal-background" @click="createModalActive = false"></div>
       <div class="modal-content">
         <div class="modal-container">
           <figure class="image container is-64x64">
@@ -315,24 +123,31 @@
           </div>
         </div>
       </div>
-      <button class="modal-close is-large" aria-label="close" @click="loginModalActive = false"></button>
+      <button class="modal-close is-large" aria-label="close" @click="createModalActive = false"></button>
     </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Nav from '~/components/Nav.vue'
+import Footer from '~/components/Footer.vue'
 
 export default {
   middleware: ['auth'],
   components: {
-    Nav
+    Nav,
+    Footer
   },
   data() {
     return{
-
+      createModalActive: false,
+      links: undefined
     }
+  },
+  mounted: async function () {
+    this.links = await this.$axios.get('/api/db/links').then((res) => res.data)
   }
 }
 </script>

@@ -42,4 +42,9 @@ router.get('/auth/user/', async function(req, res, next){
 	res.json({ user: req.user })
 })
 
+router.get('/db/links', async function(req, res, next){
+	let findedLinks = Realm.objects('Link').filtered('ownerID = "' + req.user.id + '"')
+  	res.json(findedLinks)
+})
+
 module.exports.router = router;

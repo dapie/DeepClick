@@ -3,7 +3,7 @@
     <div class="modal is-active">
       <nuxt-link to="/" class="back-button"><font-awesome-icon :icon="['fas', 'arrow-left']" class=""/>&nbsp;Вернуться на главную</nuxt-link>
       <div class="modal-content">
-        <div class="box">
+        <form class="box" v-on:submit.prevent="login()">
           <figure class="image container is-96x96">
             <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/smiling-face-with-sunglasses_1f60e.png" alt="">
           </figure>
@@ -30,10 +30,10 @@
 
           <div class="field is-grouped">
             <div class="control">
-              <button class="button is-link" @click="login()">Войти</button>
+              <button class="button is-link" type="submit">Войти</button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
     <Message ref="message"/>

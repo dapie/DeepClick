@@ -48,14 +48,7 @@
         </div>
       </div>
     </section> 
-    <footer class="footer has-background-white">
-      <div class="content has-text-centered">
-        <p>
-          <strong>DeepClick</strong> by <a href="https://vk.com/dapie">Denis Tkachev</a>. Техническая поддержка
-          <a href="http://opensource.org/licenses/mit-license.php">support@deepclick.com</a>.
-        </p>
-      </div>
-    </footer> 
+    <Footer />
     <div class="modal" :class="{'is-active': registerModalActive}">
       <div class="modal-background" @click="registerModalActive = false"></div>
       <div class="modal-content">
@@ -165,10 +158,12 @@
 
 <script>
 import Nav from '~/components/Nav.vue'
+import Footer from '~/components/Footer.vue'
 
 export default {
   components: {
-    Nav
+    Nav,
+    Footer
   },
   data() {
     return{
