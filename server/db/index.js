@@ -8,7 +8,7 @@ let UserSchema = {
     email: 'string',
     password: 'string',
     name: 'string',
-    isAdmin: 'bool',
+    isAdmin: {type: 'bool', default: false},
     timestamp: 'date'
   }
 };

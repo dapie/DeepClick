@@ -38,9 +38,9 @@
         <div class="navbar-end" v-else>
           <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-primary" @click="$emit('openRegister')">
+              <nuxt-link class="button is-primary" to="/register">
                 <strong>Регистрация</strong>
-              </a>
+              </nuxt-link>
               <nuxt-link class="button is-light" to="/login">
                 Вход
               </nuxt-link>

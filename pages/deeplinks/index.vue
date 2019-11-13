@@ -32,7 +32,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="link in links" :key="link.id">
+    <tr v-if="Object.keys(links).length > 0" v-for="link in links" :key="link.id">
       <th>{{link.id}}</th>
       <td>
         <p>{{link.name}}</p>
@@ -60,6 +60,9 @@
           Удалить
         </a>
       </td>
+    </tr>
+    <tr v-else>
+      <td colspan="6">Нет созданых ссылок</td>
     </tr>
   </tbody>
 </table>
@@ -148,6 +151,7 @@ export default {
   },
   mounted: async function () {
     this.links = await this.$axios.get('/api/db/links').then((res) => res.data)
+    console.log(Object.keys(this.links).length)
   }
 }
 </script>

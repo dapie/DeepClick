@@ -49,110 +49,6 @@
       </div>
     </section> 
     <Footer />
-    <div class="modal" :class="{'is-active': registerModalActive}">
-      <div class="modal-background" @click="registerModalActive = false"></div>
-      <div class="modal-content">
-        <div class="modal-container">
-          <figure class="image container is-96x96">
-            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/thinking-face_1f914.png" alt="">
-          </figure>
-          <h1 class="title has-text-centered">Регистрация</h1>
-          <div class="field">
-            <label class="label">Имя</label>
-            <div class="control has-icons-left">
-              <input class="input is-primary" type="text" placeholder="Павел Дуров">
-              <span class="icon is-small is-left">
-                <font-awesome-icon :icon="['fas', 'user']"/>
-              </span>
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control has-icons-left">
-              <input class="input is-primary" type="email" placeholder="mymail@mail.ru">
-              <span class="icon is-small is-left">
-                <font-awesome-icon :icon="['fas', 'envelope']"/>
-              </span>
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Пароль</label>
-            <div class="control has-icons-left">
-              <input class="input is-primary" type="password" placeholder="Пароль">
-              <span class="icon is-small is-left">
-                <font-awesome-icon :icon="['fas', 'key']"/>
-              </span>
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="control has-icons-left">
-              <input class="input is-primary" type="password" placeholder="Повторить пароль">
-              <span class="icon is-small is-left">
-                <font-awesome-icon :icon="['fas', 'key']"/>
-              </span>
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="control">
-              <label class="checkbox">
-                <input type="checkbox">
-                Я подтверждаю <a href="#">что-то</a>
-              </label>
-            </div>
-          </div>
-
-          <div class="field is-grouped is-grouped-centered">
-            <div class="control">
-              <button class="button is-link">Зарегистрироваться</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="modal-close is-large" aria-label="close" @click="registerModalActive = false"></button>
-    </div>
-
-    <div class="modal" :class="{'is-active': loginModalActive}">
-      <div class="modal-background" @click="loginModalActive = false"></div>
-      <div class="modal-content">
-        <div class="modal-container">
-          <figure class="image container is-96x96">
-            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/smiling-face-with-sunglasses_1f60e.png" alt="">
-          </figure>
-          <h1 class="title has-text-centered">Вход</h1>
-
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control has-icons-left">
-              <input class="input is-primary" type="email" placeholder="mymail@mail.ru">
-              <span class="icon is-small is-left">
-                <font-awesome-icon :icon="['fas', 'envelope']"/>
-              </span>
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Пароль</label>
-            <div class="control has-icons-left">
-              <input class="input is-primary" type="password" placeholder="Пароль">
-              <span class="icon is-small is-left">
-                <font-awesome-icon :icon="['fas', 'key']"/>
-              </span>
-            </div>
-          </div>
-
-          <div class="field is-grouped">
-            <div class="control">
-              <button class="button is-link" @click="login()">Войти</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="modal-close is-large" aria-label="close" @click="loginModalActive = false"></button>
-    </div>
   </div>
 </template>
 
@@ -167,8 +63,6 @@ export default {
   },
   data() {
     return{
-      loginModalActive: false,
-      registerModalActive: false
     }
   },
   methods: {

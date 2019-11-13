@@ -28,10 +28,13 @@
             </div>
           </div>
 
-          <div class="field is-grouped">
-            <div class="control">
-              <button class="button is-link" type="submit">Войти</button>
-            </div>
+          <div class="field">
+            <button class="button is-link is-fullwidth" type="submit">Войти</button>
+          </div>
+          <div class="field">
+            <nuxt-link to="register">
+              <button class="button is-light is-fullwidth" type="submit">У меня нет аккаунта</button>
+            </nuxt-link>
           </div>
         </form>
       </div>
