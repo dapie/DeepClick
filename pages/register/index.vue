@@ -11,7 +11,7 @@
           <div class="field">
             <label class="label">Имя</label>
             <div class="control has-icons-left">
-              <input class="input" :class="{'is-danger': nameError, 'is-primary': !nameError}" type="text" placeholder="Владимир Путин" @change="checkName" v-model="name">
+              <input class="input" :class="{'is-danger': nameError, 'is-primary': !nameError}" type="text" placeholder="Владимир Путин" @input="checkName" v-model="name">
               <span class="icon is-small is-left">
                 <font-awesome-icon :icon="['fas', 'user']"/>
               </span>
@@ -24,7 +24,7 @@
           <div class="field">
             <label class="label">Email</label>
             <div class="control has-icons-left">
-              <input class="input" :class="{'is-danger': emailError, 'is-primary': !emailError}" type="email" placeholder="mymail@mail.ru" @change="checkEmail()" v-model="email">
+              <input class="input" :class="{'is-danger': emailError, 'is-primary': !emailError}" type="email" placeholder="mymail@mail.ru" @input="checkEmail()" v-model="email">
               <span class="icon is-small is-left">
                 <font-awesome-icon :icon="['fas', 'envelope']"/>
               </span>
@@ -37,7 +37,7 @@
           <div class="field">
             <label class="label">Пароль</label>
             <div class="control has-icons-left">
-              <input class="input is-primary" type="password" placeholder="Пароль" :class="{'is-danger': passError, 'is-primary': !passError}" @change="checkPass()" v-model="password">
+              <input class="input is-primary" type="password" placeholder="Пароль" :class="{'is-danger': passError, 'is-primary': !passError}" @input="checkPass()" v-model="password">
               <span class="icon is-small is-left">
                 <font-awesome-icon :icon="['fas', 'key']"/>
               </span>
@@ -49,7 +49,7 @@
 
           <div class="field">
             <div class="control has-icons-left">
-              <input class="input" type="password" placeholder="Повторить пароль" :class="{'is-danger': confError, 'is-primary': !confError}" @change="checkConfirm()" v-model="confirmation" >
+              <input class="input" type="password" placeholder="Повторить пароль" :class="{'is-danger': confError, 'is-primary': !confError}" @input="checkPass()" v-model="confirmation" >
               <span class="icon is-small is-left">
                 <font-awesome-icon :icon="['fas', 'key']"/>
               </span>
@@ -115,8 +115,6 @@ export default {
     },
     checkPass(){
       this.passError = this.password.length >= 8 ? "" : "Пароли должен содержать минимум 8 символов"
-    },
-    checkConfirm(){
       this.confError = this.password === this.confirmation ? "" : "Пароли не совпадают"
     },
     checkName(){
@@ -126,7 +124,6 @@ export default {
       this.checkName()
       this.checkEmail()
       this.checkPass()
-      this.checkConfirm()
       if(this.emailError || this.passError || this.nameError || this.confError || !this.check){
         this.$refs.message.showMessage("Проверьте введеные данные", true)
         return

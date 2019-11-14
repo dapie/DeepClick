@@ -32,7 +32,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-if="Object.keys(links).length > 0" v-for="link in links" :key="link.id">
+    <tr v-if="links" v-for="link in links" :key="link.id">
       <th>{{link.id}}</th>
       <td>
         <p>{{link.name}}</p>
@@ -53,16 +53,13 @@
       <td>{{link.clicks}}</td>
       <td>{{link.paidClicks}}</td>
       <td>
-        <a class="button is-primary">
+        <a class="button is-primary" @click="payFor(link.id)">
           Оплатить
         </a>
-        <a class="button is-danger is-outlined">
+        <a class="button is-danger is-outlined" @click="deleteLink(link.id)">
           Удалить
         </a>
       </td>
-    </tr>
-    <tr v-else>
-      <td colspan="6">Нет созданых ссылок</td>
     </tr>
   </tbody>
 </table>

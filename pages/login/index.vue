@@ -11,21 +11,27 @@
           <div class="field">
             <label class="label">Email</label>
             <div class="control has-icons-left">
-              <input class="input is-primary" type="email" placeholder="mymail@mail.ru" v-model="email">
+              <input class="input" type="email" placeholder="mymail@mail.ru" v-model="email" @change="checkEmail()" :class="{'is-danger': emailError, 'is-primary': !emailError}">
               <span class="icon is-small is-left">
                 <font-awesome-icon :icon="['fas', 'envelope']"/>
               </span>
             </div>
+            <transition name="fade">
+              <p class="help is-danger" v-if="emailError">{{this.emailError}}</p>
+            </transition>
           </div>
 
           <div class="field">
             <label class="label">Пароль</label>
             <div class="control has-icons-left">
-              <input class="input is-primary" type="password" placeholder="Пароль" v-model="password">
+              <input class="input is-primary" type="password" placeholder="Пароль" v-model="password" @change="checkPass()" :class="{'is-danger': passError, 'is-primary': !passError}">
               <span class="icon is-small is-left">
                 <font-awesome-icon :icon="['fas', 'key']"/>
               </span>
             </div>
+            <transition name="fade">
+              <p class="help is-danger" v-if="passError">{{this.passError}}</p>
+            </transition>
           </div>
 
           <div class="field">
@@ -58,11 +64,23 @@ export default {
   data() {
     return{
       email: "",
-      password: ""
+      password: "",
+      passError: "",
+      emailError: ""
     }
   },
   methods: {
+    checkEmail(){
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      this.emailError = re.test(this.email) ? "" : "Невалидная почта"
+    },
+    checkPass(){
+      this.passError = this.password.length >= 8 ? "" : "Пароль должен содержать минимум 8 символов"
+    },
     login() {
+      this.checkEmail()
+      this.checkPass()
+      if(this.passError || this.emailError) return
       this.$auth.loginWith('local', {
         data: {
           email: this.email,
