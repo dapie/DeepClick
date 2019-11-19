@@ -24,6 +24,8 @@ let LinkSchema = {
     clicks: 'int',
     paidClicks: 'int',
     link: 'string',
+    iosLink: 'string',
+    androidLink: 'string',
     name: 'string?'
   }
 };

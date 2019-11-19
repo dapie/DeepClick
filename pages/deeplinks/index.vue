@@ -1,9 +1,6 @@
 <template>
   <div>
-    <Nav 
-      v-on:openLogin="loginModalActive = true" 
-      v-on:openRegister="registerModalActive = true"
-    />
+    <Nav />
     <section class="hero is-white welcome">
       <div class="hero-body">
         <div class="container">
@@ -42,12 +39,12 @@
       </td>
       <td>
         <p>Редирект через ссылку-прокладку:</p>
-        <a :href="'https://deepclick.com/link/' + link.id">
-          https://deepclick.com/link/{{link.id}}
+        <a :href="'localhost:3000/o/' + link.id">
+          https://dclck.com/o/{{link.id}}
         </a>
         <p>Редирект напрямую:</p>
-        <a :href="'https://deepclick.com/dlink/' + link.id">
-          https://deepclick.com/dlink/{{link.id}}
+        <a :href="'localhost:3000/do/' + link.id">
+          https://dclck.com/do/{{link.id}}
         </a>
       </td>
       <td>{{link.clicks}}</td>
@@ -71,45 +68,43 @@
             <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/link-symbol_1f517.png" alt="">
           </figure>
           <h1 class="title has-text-centered">Создать диплинк</h1>
-          <div class="tabs is-primary is-fullwidth">
+          <div class="tabs is-primary is-fullwidth is-medium">
             <ul>
-              <li class="is-active">
-                <a>
+              <li :class="{'is-active': current == 'instagram'}">
+                <a @click="changeTo('instagram')">
                   <font-awesome-icon :icon="['fab', 'instagram']"/>
                 </a>
               </li>
-              <li>
-                <a>
-                  <font-awesome-icon :icon="['fab', 'telegram']"/>
+              <li :class="{'is-active': current == 'telegram'}">
+                <a @click="changeTo('telegram')">
+                  <font-awesome-icon :icon="['fab', 'telegram-plane']"/>
                 </a>
               </li>
-              <li>
-                <a>
+              <li :class="{'is-active': current == 'vk'}">
+                <a @click="changeTo('vk')">
                   <font-awesome-icon :icon="['fab', 'vk']"/>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <font-awesome-icon :icon="['fab', 'app-store']"/>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <font-awesome-icon :icon="['fab', 'google-play']"/>
                 </a>
               </li>
             </ul>
           </div>
           <div class="field">
-            <label class="label">Название</label>
-            <div class="control">
-              <input class="input is-primary" type="text" placeholder="Ссылка на профиль _dapie">
+            <label class="label">Тип ссылки</label>
+            <div class="select is-primary is-fullwidth">
+              <select @change="changePlaceholder()" v-model="selectedType" :value="selectedType.name">
+                <option v-for="type in types" :value="type">{{type.name}}</option>
+              </select>
             </div>
           </div>
           <div class="field">
-            <p class="is-size-6 has-text-centered">Вводите <strong>ссылку</strong> на пост или на профиль</p><br>
+            <label class="label">Название</label>
+            <div class="control">
+              <input class="input is-primary" type="text" :placeholder="thisLinkName">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Ссылка</label>
             <div class="control has-icons-left">
-              <input class="input is-primary" type="text" placeholder="https://instagram.com/_dapie">
+              <input class="input is-primary" type="text" :placeholder="linkPlaceholder" v-model="inputLink">
               <span class="icon is-small is-left">
                 <font-awesome-icon :icon="['fas', 'link']"/>
               </span>
@@ -118,7 +113,7 @@
 
           <div class="field is-grouped">
             <div class="control">
-              <button class="button is-link">Создать</button>
+              <button class="button is-link" @click="createLink()">Создать</button>
             </div>
           </div>
         </div>
@@ -127,28 +122,116 @@
     </div>
     </div>
     <Footer />
+    <Message ref="message"/>
   </div>
 </template>
 
 <script>
 import Nav from '~/components/Nav.vue'
 import Footer from '~/components/Footer.vue'
+import Message from '~/components/Message.vue'
 
 export default {
   middleware: ['auth'],
   components: {
     Nav,
-    Footer
+    Footer,
+    Message
   },
   data() {
     return{
       createModalActive: false,
-      links: undefined
+      links: undefined,
+      current: "",
+      thisLinkName: "",
+      types: [],
+      selectedType: {
+        name: ""
+      },
+      linkPlaceholder: "",
+      inputLink: ""
+    }
+  },
+  methods: {
+    changeTo(next) {
+      this.current = next
+      switch(next){
+        case "instagram":
+          this.thisLinkName = "Instagram ссылка"
+          this.types = [{
+            name: "На пост",
+            placeholder: "https://www.instagram.com/p/B4z-mzwFm3-/",
+            regex: /(?:https?:\/\/)?(?:www\.)?instagram\.com\/p\/([^\/]+)\/?$/,
+            ios: 'getInstaIos()',
+            android: 'intent://instagram.com/p/$1/#Intent;package=com.instagram.android;scheme=https;end'
+          }, {
+            name: "На профиль",
+            placeholder: "https://www.instagram.com/_dapie/",
+            regex: /(?:https?:\/\/)?(?:www\.)?instagram\.com\/([^\/]+)\/?$/,
+            ios: 'instagram://user?username=$1',
+            android: 'intent://instagram.com/_u/$1/#Intent;package=com.instagram.android;scheme=https;end'
+          }, {
+            name: "На тег",
+            placeholder: "https://instagram.com/explore/tags/test",
+            regex: /(?:https?:\/\/)?(?:www\.)?instagram\.com\/explore\/tags\/([^\/]+)\/?$/,
+            ios: 'instagram://tag?name=$1',
+            android: 'intent://instagram.com/explore/tags/$1/#Intent;package=com.instagram.android;scheme=https;end'
+          }]
+          break;
+        case "telegram":
+          this.thisLinkName = "Telegram ссылка"
+          this.types = [{
+            name: "На профиль",
+            placeholder: "https://t.me/dapie",
+            regex: /(?:https?:\/\/)?(?:www\.)?t\.me\/([^\/]+)\/?$/,
+            ios: 'tg://resolve?domain=$1',
+            android: 'intent://resolve?domain=$1#Intent;package=org.telegram.messenger;scheme=tg;end'
+          }, {
+            name: "На канал/чат",
+            placeholder: "https://t.me/joinchat/GWHnrhYHe_aEOrbrkshTtA",
+            regex: /(?:https?:\/\/)?(?:www\.)?t\.me\/joinchat\/([^\/]+)\/?$/,
+            ios: 'tg://join?invite=$1',
+            android: 'intent://join?invite=$1#Intent;package=org.telegram.messenger;scheme=tg;end'
+          }]
+          break;
+        case "vk":
+          this.thisLinkName = "VK ссылка"
+          this.types = [{
+            name: "Ссылка vk.com",
+            placeholder: "https://vk.com/wall-22822305_982167",
+            regex: /(?:https?:\/\/)?(?:www\.)?(vk\.com\/[^\/]+\/?)$/,
+            ios: 'vk://$1',
+            android: 'intent://$1#Intent;package=com.vkontakte.android;scheme=vkontakte;end'
+          }, {
+            name: "Ссылка vk.me",
+            placeholder: "https://vk.me/alfabank",
+            regex: /(?:https?:\/\/)?(?:www\.)?(vk\.me\/.+\/?)$/,
+            ios: 'vk://$1',
+            android: 'intent://$1#Intent;package=com.vkontakte.android;scheme=vkontakte;end'
+          }]
+          break;
+      }
+      this.selectedType = this.types[0]
+      this.changePlaceholder()
+    },
+    changePlaceholder(){
+      this.linkPlaceholder = this.selectedType.placeholder
+      this.inputLink = ""
+    },
+    createLink(){
+      const result = this.selectedType.regex.exec(this.inputLink)
+      if(!result){ 
+        this.$refs.message.showMessage("Неверная ссылка", true)
+        return
+      }
+      const iosLink = this.inputLink.replace(this.selectedType.regex, this.selectedType.ios)
+      const androidLink = this.inputLink.replace(this.selectedType.regex, this.selectedType.android)
+      this.$refs.message.showMessage(iosLink + "\n" + androidLink) 
     }
   },
   mounted: async function () {
+    this.changeTo("instagram")
     this.links = await this.$axios.get('/api/db/links').then((res) => res.data)
-    console.log(Object.keys(this.links).length)
   }
 }
 </script>
@@ -158,7 +241,7 @@ export default {
     background: #fff;
     padding: 30px;
     border-radius: 10px;
-    width: 400px;
+    width: 500px;
     margin: 0 auto;
   }
 </style>

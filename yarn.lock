@@ -1014,6 +1014,11 @@
     consola "^2.10.1"
     defu "^0.0.3"
 
+"@nuxtjs/device@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/device/-/device-1.2.3.tgz#0b9c744fef10fa6c9b5d0155c3fbcde2c8dd671f"
+  integrity sha512-VKP8kYL7Ua7BLUStDhnT+N/nv5fta7E7S/aMuMsuWwcDDmlyN+8OCe/jBNAoe6z1LPw2MSiMQYC9VR9mUIZybg==
+
 "@nuxtjs/proxy@^1.3.3":
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/@nuxtjs/proxy/-/proxy-1.3.3.tgz#3de3d9f073e8e57167168100940be2a824a220e0"
@@ -5881,13 +5886,6 @@ nuxt-fontawesome@^0.4.0:
     "@fortawesome/fontawesome-svg-core" "^1.2.12"
     "@fortawesome/vue-fontawesome" "^0.1.4"
 
-nuxt-sass-resources-loader@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/nuxt-sass-resources-loader/-/nuxt-sass-resources-loader-2.0.5.tgz#ba88437a0abd30b718b132826e06a43b127102b5"
-  integrity sha512-IWZI7pQdQPtT1f0T/Y7IQlFrAPEdkxSjIRPxD/NA+ECQxij/CJ8UzWmTjQL9PwbaNdgbqrALoZaJpinqdeTLpg==
-  dependencies:
-    sass-resources-loader "^1.3.1"
-
 nuxt@^2.0.0:
   version "2.10.2"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-2.10.2.tgz#15ade22dfe281095865df18e6f6e861fcad1ff95"
@@ -7545,16 +7543,6 @@ sass-loader@^8.0.0:
     schema-utils "^2.1.0"
     semver "^6.3.0"
 
-sass-resources-loader@^1.3.1:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/sass-resources-loader/-/sass-resources-loader-1.3.5.tgz#716ce17585451a9f516d816955b8f26dc23f9558"
-  integrity sha512-pCxaoRZxbKxDWhu5ZcsV7/apPYrL/z0F+25C29L4e8pajWM/4jM4hRXSRP4jEWTXo/kYIU9bEXKZZdGfjN90+Q==
-  dependencies:
-    async "^2.1.4"
-    chalk "^1.1.3"
-    glob "^7.1.1"
-    loader-utils "^1.0.4"
-
 sass-resources-loader@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/sass-resources-loader/-/sass-resources-loader-2.0.1.tgz#c8427f3760bf7992f24f27d3889a1c797e971d3a"
@@ -8834,7 +8822,7 @@ vue-server-renderer@^2.6.10:
     serialize-javascript "^1.3.0"
     source-map "0.5.6"
 
-vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
+vue-style-loader@^4.1.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-4.1.2.tgz#dedf349806f25ceb4e64f3ad7c0a44fba735fcf8"
   integrity sha512-0ip8ge6Gzz/Bk0iHovU9XAUQaFt/G2B61bnWa2tCcqqdgfHs1lF9xXorFbE55Gmy92okFT+8bfmySuUOu13vxQ==

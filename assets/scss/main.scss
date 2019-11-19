@@ -11,8 +11,6 @@ $info-invert: findColorInvert($info);
 $link: hsl(242, 100%, 76%);
 $link-invert: findColorInvert($link);
 
-$breadcrumb-item-color: #fafafa;
-
 $colors: (
     "white": ($white, $black),
     "black": ($black, $white),

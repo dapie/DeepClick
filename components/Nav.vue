@@ -6,26 +6,26 @@
           <img src="~assets/logo.png" width="136">
         </nuxt-link>
 
-        <a role="button" class="navbar-burger burger is-active" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
 
-      <div id="navbarBasicExample" class="navbar-menu is-active">
+      <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-          <nuxt-link to="/deeplinks"class="navbar-item" v-if="$auth.loggedIn">
+          <nuxt-link to="/deeplinks" class="navbar-item" v-if="$auth.loggedIn">
             Диплинки
           </nuxt-link>
 
-          <a class="navbar-item">
+          <nuxt-link to="/#price" class="navbar-item">
             Цены
-          </a>
+          </nuxt-link>
 
-          <a class="navbar-item">
+          <nuxt-link to="/#support" class="navbar-item">
             Поддержка
-          </a>
+          </nuxt-link>
         </div>
         <div class="navbar-end" v-if="$auth.loggedIn">
           <div class="navbar-item">

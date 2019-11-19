@@ -1,6 +1,10 @@
 
 module.exports = {
   mode: 'universal',
+  server: {
+    port: 8000, // default: 3000
+    host: '0.0.0.0' // default: localhost
+  },
   /*
   ** Headers of the page
   */
@@ -43,6 +47,7 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     '@nuxtjs/style-resources',
+    '@nuxtjs/device',
     ['nuxt-fontawesome', {
       imports: [
         //import whole set
@@ -65,6 +70,7 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    baseURL: 'http://0.0.0.0:8000/',
   },
   /*
   ** Nuxt Auth
