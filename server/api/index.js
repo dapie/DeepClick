@@ -40,22 +40,20 @@ router.post('/auth/register/', async function (req, res, next) {
  	//Check Valid on Server
 	const cryptoPass = crypto.createHash('sha1').update(JSON.stringify(secret + password)).digest('hex')
 	let findedUser = Realm.objects('User').filtered('email = "' + email + '"')[0]
-	if(findedUser){
+	if(findedUser)
 		return res.status(400).send("Такой пользователь уже существует");
-	} else{
-		const results = Realm.objects('User').sorted('id', true);
-        const id = results.length > 0 ? results[0].id + 1 : 1;
-		Realm.write(() => {
-          Realm.create('User', {
-          	id: id,
-          	email: email,
-          	password: cryptoPass,
-          	name: name,
-          	timestamp: new Date()
-          });
-        });
-        res.json({status: 'OK'})
-	}
+	const results = Realm.objects('User').sorted('id', true);
+    const id = results.length > 0 ? results[0].id + 1 : 1;
+	Realm.write(() => {
+      Realm.create('User', {
+      	id: id,
+      	email: email,
+      	password: cryptoPass,
+      	name: name,
+      	timestamp: new Date()
+      });
+    });
+    res.json({status: 'OK'})
 });
 
 router.post('/auth/logout/', async function (req, res, next){
@@ -73,7 +71,9 @@ router.get('/db/links', async function(req, res, next){
 
 router.post('/db/links/add', async function(req, res, next){
 	const { service, link, iosLink, androidLink, name } = req.body
- 	//Check Valid on Server
+ 	let linkOnServer = Realm.objects('Link').filtered('link = "' + link + '"')[0]
+ 	if(linkOnServer)
+ 		return res.status(400).send("Такой диплинк уже существует");
  	const max = Realm.objects('Link').max('id');
     const id = max ? max + 1 : 1;
  	const userId = req.user.id

@@ -161,19 +161,19 @@ export default {
           this.types = [{
             name: "На пост",
             placeholder: "https://www.instagram.com/p/B4z-mzwFm3-/",
-            regex: /(?:https?:\/\/)?(?:www\.)?instagram\.com\/p\/([^\/]+)\/?$/,
+            regex: /https:\/\/www\.instagram\.com\/p\/([^\/]+)\/?$/,
             ios: '',
             android: 'intent://instagram.com/p/$1/#Intent;package=com.instagram.android;scheme=https;end'
           }, {
             name: "На профиль",
             placeholder: "https://www.instagram.com/_dapie/",
-            regex: /(?:https?:\/\/)?(?:www\.)?instagram\.com\/([^\/]+)\/?$/,
+            regex: /https:\/\/www\.instagram\.com\/([^\/]+)\/?$/,
             ios: 'instagram://user?username=$1',
             android: 'intent://instagram.com/_u/$1/#Intent;package=com.instagram.android;scheme=https;end'
           }, {
             name: "На тег",
             placeholder: "https://instagram.com/explore/tags/test",
-            regex: /(?:https?:\/\/)?(?:www\.)?instagram\.com\/explore\/tags\/([^\/]+)\/?$/,
+            regex: /https:\/\/www\.instagram\.com\/explore\/tags\/([^\/]+)\/?$/,
             ios: 'instagram://tag?name=$1',
             android: 'intent://instagram.com/explore/tags/$1/#Intent;package=com.instagram.android;scheme=https;end'
           }]
@@ -183,13 +183,13 @@ export default {
           this.types = [{
             name: "На профиль",
             placeholder: "https://t.me/dapie",
-            regex: /(?:https?:\/\/)?(?:www\.)?t\.me\/([^\/]+)\/?$/,
+            regex: /https:\/\/www\.t\.me\/([^\/]+)\/?$/,
             ios: 'tg://resolve?domain=$1',
             android: 'intent://resolve?domain=$1#Intent;package=org.telegram.messenger;scheme=tg;end'
           }, {
             name: "На канал/чат",
             placeholder: "https://t.me/joinchat/GWHnrhYHe_aEOrbrkshTtA",
-            regex: /(?:https?:\/\/)?(?:www\.)?t\.me\/joinchat\/([^\/]+)\/?$/,
+            regex: /https:\/\/www\.t\.me\/joinchat\/([^\/]+)\/?$/,
             ios: 'tg://join?invite=$1',
             android: 'intent://join?invite=$1#Intent;package=org.telegram.messenger;scheme=tg;end'
           }]
@@ -199,13 +199,13 @@ export default {
           this.types = [{
             name: "Ссылка vk.com",
             placeholder: "https://vk.com/wall-22822305_982167",
-            regex: /(?:https?:\/\/)?(?:www\.)?(vk\.com\/[^\/]+\/?)$/,
+            regex: /https:\/\/www\.(vk\.com\/[^\/]+\/?)$/,
             ios: 'vk://$1',
             android: 'intent://$1#Intent;package=com.vkontakte.android;scheme=vkontakte;end'
           }, {
             name: "Ссылка vk.me",
             placeholder: "https://vk.me/alfabank",
-            regex: /(?:https?:\/\/)?(?:www\.)?(vk\.me\/.+\/?)$/,
+            regex: /https:\/\/www\.(vk\.me\/.+\/?)$/,
             ios: 'vk://$1',
             android: 'intent://$1#Intent;package=com.vkontakte.android;scheme=vkontakte;end'
           }]
@@ -236,11 +236,11 @@ export default {
         iosLink: iosLink,
         androidLink: androidLink,
         name: this.linkName || this.selectedType.name
-      }).then((res) => res.data)
-      .catch((e) => this.$refs.message.showMessage("Ошибка при создании ссылки: " + e, true))
-      this.createModalActive = false
-      this.links = await this.$axios.get('/api/db/links').then((res) => res.data)
-      this.$refs.message.showMessage("Ссылка создана") 
+      }).then(async (res) => {
+        this.createModalActive = false
+        this.links = await this.$axios.get('/api/db/links').then((res) => res.data)
+        this.$refs.message.showMessage("Диплинк создан") 
+      }).catch((e) => this.$refs.message.showMessage("Ошибка: " + e.response.data, true))
     },
     async getInstaPostId(url){
       return await this.$axios.get("/api/inst/mediaId?url=" + url)
