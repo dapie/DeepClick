@@ -2,6 +2,7 @@ const router = require('express').Router()
 const { Realm } = require('../db')
 const jwt = require('express-jwt')
 const crypto = require('crypto')
+const axios = require('axios')
 // JWT middleware
 const secret = "dapiemyhero"
 router.use(
@@ -68,6 +69,39 @@ router.get('/auth/user/', async function(req, res, next){
 router.get('/db/links', async function(req, res, next){
 	let findedLinks = Realm.objects('Link').filtered('ownerID = "' + req.user.id + '"')
   	res.json(findedLinks)
+})
+
+router.post('/db/links/add', async function(req, res, next){
+	const { service, link, iosLink, androidLink, name } = req.body
+ 	//Check Valid on Server
+ 	const max = Realm.objects('Link').max('id');
+    const id = max ? max + 1 : 1;
+ 	const userId = req.user.id
+	Realm.write(() => {
+    	Realm.create('Link', {
+    		id: id,
+      		ownerID: userId,
+      		timestamp: new Date(),
+      		clicks: 0,
+      		paidClicks: 400,
+      		service,
+      		link,
+      		iosLink,
+      		androidLink,
+      		name
+    	});
+    });
+    res.json({status: 'OK'})
+})
+
+router.get('/inst/mediaId', async function(req, res, next){
+	const url = "https://api.instagram.com/oembed/?url=" + req.query.url
+	const data = await axios.get(url)
+		.then((result) => {
+			const mediaId = result.data.media_id.split('_')[0]
+			res.json({mediaId})
+		})
+		.catch((e) => res.json({error: e}))
 })
 
 module.exports.router = router;

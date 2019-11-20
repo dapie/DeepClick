@@ -98,7 +98,7 @@
           <div class="field">
             <label class="label">Название</label>
             <div class="control">
-              <input class="input is-primary" type="text" :placeholder="thisLinkName">
+              <input class="input is-primary" type="text" :placeholder="linkName">
             </div>
           </div>
           <div class="field">
@@ -143,7 +143,7 @@ export default {
       createModalActive: false,
       links: undefined,
       current: "",
-      thisLinkName: "",
+      linkName: "",
       types: [],
       selectedType: {
         name: ""
@@ -157,12 +157,12 @@ export default {
       this.current = next
       switch(next){
         case "instagram":
-          this.thisLinkName = "Instagram ссылка"
+          this.linkName = "Instagram ссылка"
           this.types = [{
             name: "На пост",
             placeholder: "https://www.instagram.com/p/B4z-mzwFm3-/",
             regex: /(?:https?:\/\/)?(?:www\.)?instagram\.com\/p\/([^\/]+)\/?$/,
-            ios: 'getInstaIos()',
+            ios: '',
             android: 'intent://instagram.com/p/$1/#Intent;package=com.instagram.android;scheme=https;end'
           }, {
             name: "На профиль",
@@ -179,7 +179,7 @@ export default {
           }]
           break;
         case "telegram":
-          this.thisLinkName = "Telegram ссылка"
+          this.linkName = "Telegram ссылка"
           this.types = [{
             name: "На профиль",
             placeholder: "https://t.me/dapie",
@@ -195,7 +195,7 @@ export default {
           }]
           break;
         case "vk":
-          this.thisLinkName = "VK ссылка"
+          this.linkName = "VK ссылка"
           this.types = [{
             name: "Ссылка vk.com",
             placeholder: "https://vk.com/wall-22822305_982167",
@@ -218,15 +218,33 @@ export default {
       this.linkPlaceholder = this.selectedType.placeholder
       this.inputLink = ""
     },
-    createLink(){
+    async createLink(){
       const result = this.selectedType.regex.exec(this.inputLink)
       if(!result){ 
         this.$refs.message.showMessage("Неверная ссылка", true)
         return
       }
+
+      if(this.current == "instagram" && this.selectedType.name == "На пост")
+        this.selectedType.ios = "instagram://media?id=" + await this.getInstaPostId(this.inputLink)
+
       const iosLink = this.inputLink.replace(this.selectedType.regex, this.selectedType.ios)
       const androidLink = this.inputLink.replace(this.selectedType.regex, this.selectedType.android)
-      this.$refs.message.showMessage(iosLink + "\n" + androidLink) 
+      await this.$axios.post('/api/db/links/add', {
+        service: this.current,
+        link: this.inputLink,
+        iosLink: iosLink,
+        androidLink: androidLink,
+        name: this.linkName || this.selectedType.name
+      }).then((res) => res.data)
+      .catch((e) => this.$refs.message.showMessage("Ошибка при создании ссылки: " + e, true))
+      this.createModalActive = false
+      this.links = await this.$axios.get('/api/db/links').then((res) => res.data)
+      this.$refs.message.showMessage("Ссылка создана") 
+    },
+    async getInstaPostId(url){
+      return await this.$axios.get("/api/inst/mediaId?url=" + url)
+        .then((res) => res.data.mediaId ? res.data.mediaId : "")
     }
   },
   mounted: async function () {
