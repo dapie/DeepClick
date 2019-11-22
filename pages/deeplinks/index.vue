@@ -1,6 +1,7 @@
 <template>
   <div>
     <Nav />
+    <Message ref="message"/>
     <section class="hero is-white welcome">
       <div class="hero-body">
         <div class="container">
@@ -10,7 +11,7 @@
           <h2 class="subtitle">
             Управление диплинками
           </h2>
-          <a class="button is-primary" @click="createModalActive = true">
+          <a class="button is-primary" @click="createModal()">
             Создать диплинк
           </a>
         </div>
@@ -39,11 +40,11 @@
       </td>
       <td>
         <p>Редирект через ссылку-прокладку:</p>
-        <a :href="'localhost:3000/o/' + link.id">
+        <a :href="'/o/' + link.id">
           https://dclck.com/o/{{link.id}}
         </a>
         <p>Редирект напрямую:</p>
-        <a :href="'localhost:3000/do/' + link.id">
+        <a :href="'/do/' + link.id">
           https://dclck.com/do/{{link.id}}
         </a>
       </td>
@@ -62,67 +63,66 @@
 </table>
 <div class="modal" :class="{'is-active': createModalActive}">
       <div class="modal-background" @click="createModalActive = false"></div>
-      <div class="modal-content">
-        <div class="modal-container">
-          <figure class="image container is-64x64">
-            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/link-symbol_1f517.png" alt="">
-          </figure>
-          <h1 class="title has-text-centered">Создать диплинк</h1>
-          <div class="tabs is-primary is-fullwidth is-medium">
-            <ul>
-              <li :class="{'is-active': current == 'instagram'}">
-                <a @click="changeTo('instagram')">
-                  <font-awesome-icon :icon="['fab', 'instagram']"/>
-                </a>
-              </li>
-              <li :class="{'is-active': current == 'telegram'}">
-                <a @click="changeTo('telegram')">
-                  <font-awesome-icon :icon="['fab', 'telegram-plane']"/>
-                </a>
-              </li>
-              <li :class="{'is-active': current == 'vk'}">
-                <a @click="changeTo('vk')">
-                  <font-awesome-icon :icon="['fab', 'vk']"/>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="field">
-            <label class="label">Тип ссылки</label>
-            <div class="select is-primary is-fullwidth">
-              <select @change="changePlaceholder()" v-model="selectedType" :value="selectedType.name">
-                <option v-for="type in types" :value="type">{{type.name}}</option>
-              </select>
+        <div class="modal-content">
+          <div class="modal-container">
+            <figure class="image container is-64x64">
+              <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/link-symbol_1f517.png" alt="">
+            </figure>
+            <h1 class="title has-text-centered">Создать диплинк</h1>
+            <div class="tabs is-primary is-fullwidth is-medium">
+              <ul>
+                <li :class="{'is-active': current == 'instagram'}">
+                  <a @click="changeTo('instagram')">
+                    <font-awesome-icon :icon="['fab', 'instagram']"/>
+                  </a>
+                </li>
+                <li :class="{'is-active': current == 'telegram'}">
+                  <a @click="changeTo('telegram')">
+                    <font-awesome-icon :icon="['fab', 'telegram-plane']"/>
+                  </a>
+                </li>
+                <li :class="{'is-active': current == 'vk'}">
+                  <a @click="changeTo('vk')">
+                    <font-awesome-icon :icon="['fab', 'vk']"/>
+                  </a>
+                </li>
+              </ul>
             </div>
-          </div>
-          <div class="field">
-            <label class="label">Название</label>
-            <div class="control">
-              <input class="input is-primary" type="text" :placeholder="linkName">
+            <div class="field">
+              <label class="label">Тип ссылки</label>
+              <div class="select is-primary is-fullwidth">
+                <select @change="changePlaceholder()" v-model="selectedType" :value="selectedType.name">
+                  <option v-for="type in types" :value="type">{{type.name}}</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <label class="label">Ссылка</label>
-            <div class="control has-icons-left">
-              <input class="input is-primary" type="text" :placeholder="linkPlaceholder" v-model="inputLink">
-              <span class="icon is-small is-left">
-                <font-awesome-icon :icon="['fas', 'link']"/>
-              </span>
+            <div class="field">
+              <label class="label">Название</label>
+              <div class="control">
+                <input class="input is-primary" type="text" :placeholder="linkNamePlaceholder" v-model="linkName">
+              </div>
             </div>
-          </div>
+            <div class="field">
+              <label class="label">Ссылка</label>
+              <div class="control has-icons-left">
+                <input class="input is-primary" type="text" :placeholder="linkPlaceholder" v-model="inputLink">
+                <span class="icon is-small is-left">
+                  <font-awesome-icon :icon="['fas', 'link']"/>
+                </span>
+              </div>
+            </div>
 
-          <div class="field is-grouped">
-            <div class="control">
-              <button class="button is-link" @click="createLink()">Создать</button>
+            <div class="field is-grouped">
+              <div class="control">
+                <button class="button is-link" @click="createLink()">Создать</button>
+              </div>
             </div>
           </div>
         </div>
+        <button class="modal-close is-large" aria-label="close" @click="createModalActive = false"></button>
       </div>
-      <button class="modal-close is-large" aria-label="close" @click="createModalActive = false"></button>
-    </div>
     </div>
     <Footer />
-    <Message ref="message"/>
   </div>
 </template>
 
@@ -144,6 +144,7 @@ export default {
       links: undefined,
       current: "",
       linkName: "",
+      linkNamePlaceholder: "",
       types: [],
       selectedType: {
         name: ""
@@ -153,11 +154,16 @@ export default {
     }
   },
   methods: {
+    createModal(){
+      this.createModalActive = true
+      this.linkName = "",
+      this.inputLink = ""
+    },
     changeTo(next) {
       this.current = next
       switch(next){
         case "instagram":
-          this.linkName = "Instagram ссылка"
+          this.linkNamePlaceholder = "Instagram ссылка"
           this.types = [{
             name: "На пост",
             placeholder: "https://www.instagram.com/p/B4z-mzwFm3-/",
@@ -179,7 +185,7 @@ export default {
           }]
           break;
         case "telegram":
-          this.linkName = "Telegram ссылка"
+          this.linkNamePlaceholder = "Telegram ссылка"
           this.types = [{
             name: "На профиль",
             placeholder: "https://t.me/dapie",
@@ -195,7 +201,7 @@ export default {
           }]
           break;
         case "vk":
-          this.linkName = "VK ссылка"
+          this.linkNamePlaceholder = "VK ссылка"
           this.types = [{
             name: "Ссылка vk.com",
             placeholder: "https://vk.com/wall-22822305_982167",
@@ -235,7 +241,7 @@ export default {
         link: this.inputLink,
         iosLink: iosLink,
         androidLink: androidLink,
-        name: this.linkName || this.selectedType.name
+        name: this.linkName ? this.linkName : this.linkNamePlaceholder
       }).then(async (res) => {
         this.createModalActive = false
         this.links = await this.$axios.get('/api/db/links').then((res) => res.data)
@@ -245,6 +251,12 @@ export default {
     async getInstaPostId(url){
       return await this.$axios.get("/api/inst/mediaId?url=" + url)
         .then((res) => res.data.mediaId ? res.data.mediaId : "")
+    },
+    async deleteLink(id){
+      await this.$axios.post("/api/db/links/delete", { id })
+        .then(async (res) => {
+          this.links = await this.$axios.get('/api/db/links').then((res) => res.data)
+        }).catch((e) => this.$refs.message.showMessage("Ошибка: " + e.response.data, true))
     }
   },
   mounted: async function () {

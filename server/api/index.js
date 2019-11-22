@@ -10,7 +10,7 @@ router.use(
     secret: secret,
     header: 'Bearer'
   }).unless({
-    path: ['/api/auth/login', '/api/auth/register']
+    path: [/\/api\/auth\/login/, /\/api\/auth\/register/, /\/api\/db\/links\/\d+/]
   })
 )
 const jsonwebtoken = require('jsonwebtoken')
@@ -65,8 +65,20 @@ router.get('/auth/user/', async function(req, res, next){
 })
 
 router.get('/db/links', async function(req, res, next){
-	let findedLinks = Realm.objects('Link').filtered('ownerID = "' + req.user.id + '"')
+	let findedLinks = Realm.objects('Link').filtered('ownerID = "' + req.user.id + '"').sorted('id')
   	res.json(findedLinks)
+})
+
+router.get('/db/links/:id', async function(req, res, next){
+	let findedLink = Realm.objects('Link').filtered('id = "' + req.params.id + '"')[0]
+	if(!findedLink) return res.status(400).send("Такой диплинк не существует");
+	return res.json({
+		link: findedLink.link,
+		iosLink: findedLink.iosLink,
+		androidLink: findedLink.androidLink,
+		id: findedLink.id,
+		works: true
+	})
 })
 
 router.post('/db/links/add', async function(req, res, next){
@@ -90,6 +102,17 @@ router.post('/db/links/add', async function(req, res, next){
       		androidLink,
       		name
     	});
+    });
+    res.json({status: 'OK'})
+})
+
+router.post('/db/links/delete', async function(req, res, next){
+	const { id } = req.body
+ 	let linkOnServer = Realm.objects('Link').filtered('id = "' + id + '"')[0]
+ 	if(!linkOnServer) return res.status(400).send("Такой диплинк уже не существует");
+ 	if(linkOnServer.ownerID != req.user.id) return res.status(400).send("Ссылка не пренадлежит вам");
+	Realm.write(() => {
+		Realm.delete(linkOnServer);
     });
     res.json({status: 'OK'})
 })

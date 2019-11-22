@@ -52,7 +52,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .navbar.is-spaced{
     padding: 1rem 0 !important;
 }

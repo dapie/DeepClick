@@ -12,9 +12,6 @@
               <h1 class="title">
                 Сервис диплинков
               </h1>
-              <a class="button is-primary" href="vk://vk.com/im?sel=-147591239">
-                Тестовая ссылка
-              </a>
               <h2 class="subtitle">
                 Увеличьте эффективность своей рекламной <br> кампании на 20%.
                 <br>
@@ -176,7 +173,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .modal-container{
     background: #fff;
     padding: 30px;
@@ -205,5 +202,4 @@ export default {
       padding: 0px 50px;
     }
   }
-
 </style>

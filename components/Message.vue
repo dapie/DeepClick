@@ -51,7 +51,7 @@ export default {
   }
 }
   .message{
-    position: absolute;
+    position: fixed;
     left: 50%;
     transform: translateX(-50%);
     bottom: 30px;
