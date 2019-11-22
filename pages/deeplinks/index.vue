@@ -189,13 +189,13 @@ export default {
           this.types = [{
             name: "На профиль",
             placeholder: "https://t.me/dapie",
-            regex: /https:\/\/www\.t\.me\/([^\/]+)\/?$/,
+            regex: /https:\/\/t\.me\/([^\/]+)\/?$/,
             ios: 'tg://resolve?domain=$1',
             android: 'intent://resolve?domain=$1#Intent;package=org.telegram.messenger;scheme=tg;end'
           }, {
             name: "На канал/чат",
             placeholder: "https://t.me/joinchat/GWHnrhYHe_aEOrbrkshTtA",
-            regex: /https:\/\/www\.t\.me\/joinchat\/([^\/]+)\/?$/,
+            regex: /https:\/\/t\.me\/joinchat\/([^\/]+)\/?$/,
             ios: 'tg://join?invite=$1',
             android: 'intent://join?invite=$1#Intent;package=org.telegram.messenger;scheme=tg;end'
           }]

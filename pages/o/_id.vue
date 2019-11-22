@@ -6,7 +6,7 @@
 				<img src="~assets/logo-w.png" alt="" style="height: 45px;">
 			</nuxt-link>
 			<a class="button is-primary is-fullwidth is-medium" :href="link">
-				Открыть в Instagram
+				Открыть в {{this.deeplink.service.charAt(0).toUpperCase() + this.deeplink.service.slice(1)}}
 			</a>
 			<nav class="breadcrumb is-centered">
 			  <ul>
@@ -17,25 +17,10 @@
 	    </div>
 	  </div>
 	</section>
-<!-- 	<div class="container">
-		<nuxt-link to="/">
-			<img src="~assets/logo.png" alt="" style="height: 45px;">
-		</nuxt-link>
-		<a class="button is-primary is-fullwidth is-medium" :href="link">
-			Открыть в Instagram
-		</a>
-		<nav class="breadcrumb is-centered">
-		  <ul>
-		    <li><nuxt-link to="/">Создать диплинк</nuxt-link></li>
-		    <li><nuxt-link to="/#support">Помощь</nuxt-link></li>
-		  </ul>
-		</nav>
-	</div> -->
 </template>
 
 <style scoped lang="scss">
 	.container{
-		margin-top: 60px;
 		max-width: 500px;
 	}
 	.button{

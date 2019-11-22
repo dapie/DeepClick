@@ -29,7 +29,7 @@
         </div>
         <div class="navbar-end" v-if="$auth.loggedIn">
           <div class="navbar-item">
-            <a href="" class="navbar-item">{{$auth.user.email}}</a>
+            <a class="navbar-item">{{$auth.user.email}}</a>
             <a class="button is-primary is-outlined" @click="$auth.logout()">
               Выход
             </a>

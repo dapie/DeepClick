@@ -77,6 +77,7 @@ router.get('/db/links/:id', async function(req, res, next){
 		iosLink: findedLink.iosLink,
 		androidLink: findedLink.androidLink,
 		id: findedLink.id,
+		service: findedLink.service,
 		works: true
 	})
 })
