@@ -72,13 +72,14 @@ router.get('/db/links', async function(req, res, next){
 router.get('/db/links/:id', async function(req, res, next){
 	let findedLink = Realm.objects('Link').filtered('id = "' + req.params.id + '"')[0]
 	if(!findedLink) return res.status(400).send("Такой диплинк не существует");
+	const works = findedLink.paidClicks - findedLink.clicks >= 0
 	return res.json({
 		link: findedLink.link,
 		iosLink: findedLink.iosLink,
 		androidLink: findedLink.androidLink,
 		id: findedLink.id,
 		service: findedLink.service,
-		works: true
+		works
 	})
 })
 
@@ -103,6 +104,17 @@ router.post('/db/links/add', async function(req, res, next){
       		androidLink,
       		name
     	});
+    });
+    res.json({status: 'OK'})
+})
+
+router.post('/db/links/click', async function(req, res, next){
+	const { id } = req.body
+ 	let linkOnServer = Realm.objects('Link').filtered('id = "' + id + '"')[0]
+ 	if(!linkOnServer)
+ 		return res.status(400).send("Диплинк не существует");
+	Realm.write(() => {
+    	linkOnServer.clicks++
     });
     res.json({status: 'OK'})
 })

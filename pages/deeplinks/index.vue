@@ -49,7 +49,7 @@
         </a>
       </td>
       <td>{{link.clicks}}</td>
-      <td>{{link.paidClicks}}</td>
+      <td>{{link.paidClicks - link.clicks}}</td>
       <td>
         <a class="button is-primary" @click="payFor(link.id)">
           Оплатить

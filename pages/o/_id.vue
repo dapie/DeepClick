@@ -2,10 +2,10 @@
 	<section class="hero is-fullheight has-text-centered">
 	  <div class="hero-body">
 	    <div class="container">
-	      <nuxt-link to="/">
+	      	<nuxt-link to="/">
 				<img src="~assets/logo-w.png" alt="" style="height: 45px;">
 			</nuxt-link>
-			<a class="button is-primary is-fullwidth is-medium" :href="link">
+			<a class="button is-primary is-fullwidth is-medium" @click="clickDeeplink()">
 				Открыть в {{this.deeplink.service.charAt(0).toUpperCase() + this.deeplink.service.slice(1)}}
 			</a>
 			<nav class="breadcrumb is-centered">
@@ -40,24 +40,32 @@
 
 <script>
 export default {
-  validate ({ params }) {
-    return /^\d+$/.test(params.id)
+  async middleware ({ params, redirect}) {
+    if(!/^\d+$/.test(params.id)) return redirect("/")
   },
-  async asyncData ({ params, error, $axios }) {
-    const deeplink = await $axios.get('/api/db/links/' + params.id)
+  async asyncData ({ params, error, $axios, isDesktop, isIos, redirect }) {
+    let deeplink = await $axios.get('/api/db/links/' + params.id)
     	.then((res) => res.data)
     	.catch((e) => error({ message: e.response.data, statusCode: 404 }))
-    return {deeplink}
+    if(!deeplink.message && !deeplink.works) 
+    	return error({ message: "Ссылка не оплачена", statusCode: 404 })
+    if(deeplink.message) return
+    const id = params.id
+    const link = isDesktop ? deeplink.link :
+    	isIos ? deeplink.iosLink :
+    	deeplink.androidLink
+    return {deeplink, id, link}
   },
-  data(){
-  	return{
-  		link: undefined
+  methods: {
+  	async clickDeeplink(){
+  		await this.$axios.post('/api/db/links/click', {
+  			id: this.id
+  		})
+  		window.location.href = this.link
   	}
   },
   mounted: function () {
-  	this.link = this.$device.isDesktop ? this.deeplink.link :
-    	this.$device.isIos ? this.deeplink.iosLink :
-    	this.deeplink.androidLink
+    setTimeout(() => this.clickDeeplink(), 3000)
   }
 }
 </script>
