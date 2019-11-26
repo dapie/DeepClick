@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="modal is-active">
-      <nuxt-link to="/" class="back-button"><font-awesome-icon :icon="['fas', 'arrow-left']" class=""/>&nbsp;Вернуться на главную</nuxt-link>
       <div class="modal-content">
         <form class="box" v-on:submit.prevent="login()">
+          <nuxt-link to="/" class="back-button has-text-centered">
+            На главную
+          </nuxt-link>
           <figure class="image container is-96x96">
             <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/smiling-face-with-sunglasses_1f60e.png" alt="">
           </figure>
@@ -95,12 +97,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .back-button{
-    position: absolute;
-    left: 20px;
-    top: 20px;
-  }
-
   .box{
     width: 400px;
     margin: 0 auto;
@@ -115,16 +111,31 @@ export default {
     color: $danger;
   }
 
-  @media only screen and (max-width: 400px) {
+  .back-button{
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  @media only screen and (max-width: 500px) {
     .box{
       width: 100%;
       margin: 0;
+      box-shadow: none;
+    }
+    .modal{
+      display: block !important;
+      background: #fff;
+    }
+    .modal-content{
+      margin: 0;
+      max-height: none;
+      display: block;
     }
   }
-
-  @media only screen and (max-width: 769px) {
-    .image.comp img {
-      padding: 0px 50px;
-    }
+  .fade-enter-active, .fade-leave-active {
+    transition: all .3s ease-in;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+    opacity: 0;
   }
 </style>
