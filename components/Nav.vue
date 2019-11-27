@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <nav class="navbar is-spaced" :class="{'is-active': navActive}" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-spaced is-transparent" :class="{'is-active': navActive}" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <nuxt-link to="/" class="navbar-item">
           <img src="~assets/logo.png" width="136">

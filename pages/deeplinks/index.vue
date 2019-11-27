@@ -150,7 +150,8 @@ export default {
         name: ""
       },
       linkPlaceholder: "",
-      inputLink: ""
+      inputLink: "",
+      wantDelete: -1
     }
   },
   methods: {
@@ -253,10 +254,16 @@ export default {
         .then((res) => res.data.mediaId ? res.data.mediaId : "")
     },
     async deleteLink(id){
+      if(this.wantDelete != id){
+        this.wantDelete = id
+        this.$refs.message.showMessage("Нажмите еще раз, для удаления", true)
+        return
+      }
       await this.$axios.post("/api/db/links/delete", { id })
         .then(async (res) => {
           this.links = await this.$axios.get('/api/db/links').then((res) => res.data)
         }).catch((e) => this.$refs.message.showMessage("Ошибка: " + e.response.data, true))
+        this.$refs.message.showMessage("Диплинк удален")
     }
   },
   mounted: async function () {
