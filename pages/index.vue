@@ -30,7 +30,7 @@
     <section class="hero is-primary is-medium">
       <div class="hero-body">
         <div class="container has-text-centered">
-              <figure class="image container is-96x96"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/face-with-monocle_1f9d0.png" alt=""></figure>
+              <figure class="image container is-96x96"><img src="~assets/face-with-monocle.png" alt=""></figure>
               <h1 class="title">
                 Как же пользоваться нашим сервисом ?
               </h1>
@@ -50,7 +50,7 @@
     </section> 
     <section class="section is-medium" id="price">
       <div class="container has-text-centered">
-        <figure class="image container is-96x96"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/money-with-wings_1f4b8.png" alt=""></figure>
+        <figure class="image container is-96x96"><img src="~assets/money-with-wings.png" alt=""></figure>
         <h1 class="title">
           Цены на наши пакеты
         </h1>
@@ -58,7 +58,7 @@
           <div class="column has-text-centered">
             <div class="box content">
               <p class="has-text-weight-normal is-size-4">Первый</p>
-              <img class="image container is-64x64" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/white-smiling-face_263a.png" alt="">
+              <img class="image container is-64x64" src="~assets/white-smiling-face.png" alt="">
               <h2>400 руб./мес.</h2>
               <p class="has-text-weight-normal is-size-5">400 кликов/мес.</p>
               <h4>Доп пакеты</h4>
@@ -73,7 +73,7 @@
           <div class="column has-text-centered">
             <div class="box content">
               <p class="has-text-weight-normal is-size-4">Второй</p>
-              <img class="image container is-64x64" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/face-savouring-delicious-food_1f60b.png" alt="">
+              <img class="image container is-64x64" src="~assets/face-savouring-delicious-food.png" alt="">
               <h2>800 руб./мес.</h2>
               <p class="has-text-weight-normal is-size-5">800 кликов/мес.</p>
               <h4>Доп пакеты</h4>
@@ -88,7 +88,7 @@
           <div class="column has-text-centered">
             <div class="box content">
               <p class="has-text-weight-normal is-size-4">Третий</p>
-              <img class="image container is-64x64" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/grinning-face-with-one-large-and-one-small-eye_1f92a.png" alt="">
+              <img class="image container is-64x64" src="~assets/grinning-face-with-one-large-and-one-small-eye.png" alt="">
               <h2>1400 руб./мес.</h2>
               <p class="has-text-weight-normal is-size-5">1500 кликов/мес.</p>
               <h4>Доп пакеты</h4>
@@ -103,7 +103,7 @@
           <div class="column has-text-centered">
             <div class="box content">
               <p class="has-text-weight-normal is-size-4">Четвертый</p>
-              <img class="image container is-64x64" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/money-mouth-face_1f911.png" alt="">
+              <img class="image container is-64x64" src="~assets/money-mouth-face.png" alt="">
               <h2>2000 руб./мес.</h2>
               <p class="has-text-weight-normal is-size-5">2000 кликов/мес.</p>
               <h4>Доп пакеты</h4>
@@ -124,7 +124,9 @@
     <section class="hero is-primary is-medium" id="support">
       <div class="hero-body">
         <div class="container has-text-centered">
-              <figure class="image container is-96x96"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/hospital_1f3e5.png" alt=""></figure>
+              <figure class="image container is-96x96">
+                <img src="~assets/hospital.png" alt="">
+              </figure>
               <h1 class="title">
                 Возникли проблемы ?
               </h1>

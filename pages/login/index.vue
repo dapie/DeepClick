@@ -7,7 +7,7 @@
             На главную
           </nuxt-link>
           <figure class="image container is-96x96">
-            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/smiling-face-with-sunglasses_1f60e.png" alt="">
+            <img src="~assets/smiling-face-with-sunglasses.png" alt="">
           </figure>
           <h1 class="title has-text-centered">Вход</h1>
           <div class="field">

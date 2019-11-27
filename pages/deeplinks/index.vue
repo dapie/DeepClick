@@ -66,7 +66,7 @@
         <div class="modal-content">
           <div class="modal-container">
             <figure class="image container is-64x64">
-              <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/link-symbol_1f517.png" alt="">
+              <img src="~assets/link-symbol.png" alt="">
             </figure>
             <h1 class="title has-text-centered">Создать диплинк</h1>
             <div class="tabs is-primary is-fullwidth is-medium">
