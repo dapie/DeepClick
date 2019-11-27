@@ -13,7 +13,8 @@ router.use(
 		path: [
 			/\/api\/auth\/login/,
 			/\/api\/auth\/register/,
-			/\/api\/db\/links\/\d+/
+			/\/api\/db\/links\/\d+/,
+			/\/api\/db\/links\/click/
 		]
 	})
 );
