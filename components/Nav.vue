@@ -1,19 +1,36 @@
 <template>
   <div class="container">
-    <nav class="navbar is-spaced is-transparent" :class="{'is-active': navActive}" role="navigation" aria-label="main navigation">
+    <nav
+      class="navbar is-spaced is-transparent"
+      :class="{ 'is-active': navActive }"
+      role="navigation"
+      aria-label="main navigation"
+    >
       <div class="navbar-brand">
         <nuxt-link to="/" class="navbar-item">
-          <img src="~assets/logo.png" width="136">
+          <img src="~assets/img/logo.png" width="136" />
         </nuxt-link>
 
-        <a role="button" class="navbar-burger burger" :class="{'is-active': navActive}" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" @click="navActive = !navActive">
+        <a
+          role="button"
+          class="navbar-burger burger"
+          :class="{ 'is-active': navActive }"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+          @click="navActive = !navActive"
+        >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
 
-      <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active': navActive}">
+      <div
+        id="navbarBasicExample"
+        class="navbar-menu"
+        :class="{ 'is-active': navActive }"
+      >
         <div class="navbar-start">
           <nuxt-link to="/deeplinks" class="navbar-item" v-if="$auth.loggedIn">
             Диплинки
@@ -29,7 +46,7 @@
         </div>
         <div class="navbar-end" v-if="$auth.loggedIn">
           <div class="navbar-item">
-            {{$auth.user.email}}
+            {{ $auth.user.email }}
           </div>
           <div class="navbar-item">
             <a class="button is-primary is-outlined" @click="$auth.logout()">
@@ -55,14 +72,14 @@
 </template>
 
 <style scoped>
-.navbar.is-spaced{
+.navbar.is-spaced {
   padding: 1rem 0 !important;
 }
-nav.is-active{
+nav.is-active {
   background: white;
   box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);
 }
-.navbar-menu{
+.navbar-menu {
   box-shadow: none;
 }
 </style>
@@ -70,9 +87,9 @@ nav.is-active{
 <script>
 export default {
   data() {
-    return{
+    return {
       navActive: false
-    }
-  },
-}
+    };
+  }
+};
 </script>
