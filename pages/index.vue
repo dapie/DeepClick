@@ -1,7 +1,7 @@
 <template>
-  <div >
-    <Nav 
-      v-on:openLogin="loginModalActive = true" 
+  <div>
+    <Nav
+      v-on:openLogin="loginModalActive = true"
       v-on:openRegister="registerModalActive = true"
     />
     <section class="hero is-white welcome">
@@ -13,197 +13,240 @@
                 Сервис диплинков
               </h1>
               <h2 class="subtitle">
-                Увеличьте эффективность своей рекламной <br> кампании на 20%.
-                <br>
-                Получите 500 кликов на любую социальную сеть бесплатно, далее - от 490 рублей.
+                Увеличьте эффективность своей рекламной <br />
+                кампании на 20%.
+                <br />
+                Получите 500 кликов на любую социальную сеть бесплатно, далее -
+                от 490 рублей.
               </h2>
             </div>
             <div class="column">
               <figure class="image comp">
-                <img src="~assets/comp.png">
+                <img src="~assets/img/comp.png" />
               </figure>
             </div>
           </div>
         </div>
       </div>
-    </section> 
+    </section>
     <section class="hero is-primary is-medium">
       <div class="hero-body">
         <div class="container has-text-centered">
-              <figure class="image container is-96x96"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/face-with-monocle_1f9d0.png" alt=""></figure>
-              <h1 class="title">
-                Как же пользоваться нашим сервисом ?
-              </h1>
-              <nav class="breadcrumb has-arrow-separator is-large is-centered" aria-label="breadcrumbs">
-                <ul>
-                  <li><a href="#">Зарегистрируйся</a></li>
-                  <li><a href="#">Создай диплинк</a></li>
-                  <li><a href="#">Оплати клики</a></li>
-                  <li><a href="#" aria-current="page">Получай подписчиков</a></li>
-                </ul>
-              </nav>
-              <h2 class="subtitle">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </h2>
-        </div>
-      </div>
-    </section> 
-    <footer class="footer has-background-white">
-      <div class="content has-text-centered">
-        <p>
-          <strong>DeepClick</strong> by <a href="https://vk.com/dapie">Denis Tkachev</a>. Техническая поддержка
-          <a href="http://opensource.org/licenses/mit-license.php">support@deepclick.com</a>.
-        </p>
-      </div>
-    </footer> 
-    <div class="modal" :class="{'is-active': registerModalActive}">
-      <div class="modal-background" @click="registerModalActive = false"></div>
-      <div class="modal-content">
-        <div class="modal-container">
           <figure class="image container is-96x96">
-            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/thinking-face_1f914.png" alt="">
+            <img src="~assets/img/face-with-monocle.png" alt="" />
           </figure>
-          <h1 class="title has-text-centered">Регистрация</h1>
-          <div class="field">
-            <label class="label">Имя</label>
-            <div class="control has-icons-left">
-              <input class="input is-primary" type="text" placeholder="Павел Дуров">
-              <span class="icon is-small is-left">
-                <font-awesome-icon :icon="['fas', 'user']"/>
-              </span>
+          <h1 class="title">
+            Как же пользоваться нашим сервисом ?
+          </h1>
+          <nav
+            class="breadcrumb has-arrow-separator is-large is-centered"
+            aria-label="breadcrumbs"
+          >
+            <ul>
+              <li><a>Зарегистрируйся</a></li>
+              <li><a>Создай диплинк</a></li>
+              <li><a>Оплати клики</a></li>
+              <li><a>Получай подписчиков</a></li>
+            </ul>
+          </nav>
+          <h2 class="subtitle">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          </h2>
+        </div>
+      </div>
+    </section>
+    <section class="section is-medium" id="price">
+      <div class="container has-text-centered">
+        <figure class="image container is-96x96">
+          <img src="~assets/img/money-with-wings.png" alt="" />
+        </figure>
+        <h1 class="title">
+          Цены на наши пакеты
+        </h1>
+        <div class="columns is-3">
+          <div class="column has-text-centered">
+            <div class="box content">
+              <p class="has-text-weight-normal is-size-4">Первый</p>
+              <img
+                class="image container is-64x64"
+                src="~assets/img/white-smiling-face.png"
+                alt=""
+              />
+              <h2>400 руб./мес.</h2>
+              <p class="has-text-weight-normal is-size-5">400 кликов/мес.</p>
+              <h4>Доп пакеты</h4>
+              <p class="has-text-weight-normal is-size-6">
+                100 кликов - 150 Руб.
+              </p>
+              <p class="has-text-weight-normal is-size-6">
+                500 кликов - 300 Руб.
+              </p>
+              <p class="has-text-weight-normal is-size-6">
+                1000 кликов - 600 Руб.
+              </p>
+              <button class="button is-primary is-fullwidth">
+                Выбрать
+              </button>
             </div>
           </div>
-
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control has-icons-left">
-              <input class="input is-primary" type="email" placeholder="mymail@mail.ru">
-              <span class="icon is-small is-left">
-                <font-awesome-icon :icon="['fas', 'envelope']"/>
-              </span>
+          <div class="column has-text-centered">
+            <div class="box content">
+              <p class="has-text-weight-normal is-size-4">Второй</p>
+              <img
+                class="image container is-64x64"
+                src="~assets/img/face-savouring-delicious-food.png"
+                alt=""
+              />
+              <h2>800 руб./мес.</h2>
+              <p class="has-text-weight-normal is-size-5">800 кликов/мес.</p>
+              <h4>Доп пакеты</h4>
+              <p class="has-text-weight-normal is-size-6">
+                100 кликов - 150 Руб.
+              </p>
+              <p class="has-text-weight-normal is-size-6">
+                500 кликов - 300 Руб.
+              </p>
+              <p class="has-text-weight-normal is-size-6">
+                1000 кликов - 500 Руб.
+              </p>
+              <button class="button is-primary is-fullwidth">
+                Выбрать
+              </button>
             </div>
           </div>
-
-          <div class="field">
-            <label class="label">Пароль</label>
-            <div class="control has-icons-left">
-              <input class="input is-primary" type="password" placeholder="Пароль">
-              <span class="icon is-small is-left">
-                <font-awesome-icon :icon="['fas', 'key']"/>
-              </span>
+          <div class="column has-text-centered">
+            <div class="box content">
+              <p class="has-text-weight-normal is-size-4">Третий</p>
+              <img
+                class="image container is-64x64"
+                src="~assets/img/grinning-face-with-one-large-and-one-small-eye.png"
+                alt=""
+              />
+              <h2>1400 руб./мес.</h2>
+              <p class="has-text-weight-normal is-size-5">1500 кликов/мес.</p>
+              <h4>Доп пакеты</h4>
+              <p class="has-text-weight-normal is-size-6">
+                100 кликов - 150 Руб.
+              </p>
+              <p class="has-text-weight-normal is-size-6">
+                500 кликов - 300 Руб.
+              </p>
+              <p class="has-text-weight-normal is-size-6">
+                1000 кликов - 500 Руб.
+              </p>
+              <button class="button is-primary is-fullwidth">
+                Выбрать
+              </button>
             </div>
           </div>
-
-          <div class="field">
-            <div class="control has-icons-left">
-              <input class="input is-primary" type="password" placeholder="Повторить пароль">
-              <span class="icon is-small is-left">
-                <font-awesome-icon :icon="['fas', 'key']"/>
-              </span>
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="control">
-              <label class="checkbox">
-                <input type="checkbox">
-                Я подтверждаю <a href="#">что-то</a>
-              </label>
-            </div>
-          </div>
-
-          <div class="field is-grouped is-grouped-centered">
-            <div class="control">
-              <button class="button is-link">Зарегистрироваться</button>
+          <div class="column has-text-centered">
+            <div class="box content">
+              <p class="has-text-weight-normal is-size-4">Четвертый</p>
+              <img
+                class="image container is-64x64"
+                src="~assets/img/money-mouth-face.png"
+                alt=""
+              />
+              <h2>2000 руб./мес.</h2>
+              <p class="has-text-weight-normal is-size-5">2000 кликов/мес.</p>
+              <h4>Доп пакеты</h4>
+              <p class="has-text-weight-normal is-size-6">
+                100 кликов - 150 Руб.
+              </p>
+              <p class="has-text-weight-normal is-size-6">
+                500 кликов - 300 Руб.
+              </p>
+              <p class="has-text-weight-normal is-size-6">
+                1000 кликов - 500 Руб.
+              </p>
+              <button class="button is-primary is-fullwidth">
+                Выбрать
+              </button>
             </div>
           </div>
         </div>
+        <h2 class="subtitle">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        </h2>
       </div>
-      <button class="modal-close is-large" aria-label="close" @click="registerModalActive = false"></button>
-    </div>
-
-    <div class="modal" :class="{'is-active': loginModalActive}">
-      <div class="modal-background" @click="loginModalActive = false"></div>
-      <div class="modal-content">
-        <div class="modal-container">
+    </section>
+    <section class="hero is-primary is-medium" id="support">
+      <div class="hero-body">
+        <div class="container has-text-centered">
           <figure class="image container is-96x96">
-            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/smiling-face-with-sunglasses_1f60e.png" alt="">
+            <img src="~assets/img/hospital.png" alt="" />
           </figure>
-          <h1 class="title has-text-centered">Вход</h1>
-
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control has-icons-left">
-              <input class="input is-primary" type="email" placeholder="mymail@mail.ru">
-              <span class="icon is-small is-left">
-                <font-awesome-icon :icon="['fas', 'envelope']"/>
-              </span>
-            </div>
+          <h1 class="title">
+            Возникли проблемы ?
+          </h1>
+          <div class="buttons is-centered">
+            <button class="button is-white is-outlined is-medium">
+              <font-awesome-icon :icon="['fas', 'envelope']" class="is-small" />
+              &nbsp; Почта
+            </button>
+            <button class="button is-white is-outlined is-medium">
+              <font-awesome-icon :icon="['fab', 'telegram']" class="is-small" />
+              &nbsp; Telegram
+            </button>
+            <button class="button is-white is-outlined is-medium">
+              <font-awesome-icon :icon="['fab', 'vk']" class="is-small" />
+              &nbsp; Вконтакте
+            </button>
           </div>
-
-          <div class="field">
-            <label class="label">Пароль</label>
-            <div class="control has-icons-left">
-              <input class="input is-primary" type="password" placeholder="Пароль">
-              <span class="icon is-small is-left">
-                <font-awesome-icon :icon="['fas', 'key']"/>
-              </span>
-            </div>
-          </div>
-
-          <div class="field is-grouped">
-            <div class="control">
-              <button class="button is-link">Войти</button>
-            </div>
-          </div>
+          <h2 class="subtitle">
+            Пишите нам, мы всегда готовы ответить на ваши вопросы.
+          </h2>
         </div>
       </div>
-      <button class="modal-close is-large" aria-label="close" @click="loginModalActive = false"></button>
-    </div>
+    </section>
+    <Footer />
   </div>
 </template>
 
 <script>
-import Nav from '~/components/Nav.vue'
+import Nav from "~/components/Nav.vue";
+import Footer from "~/components/Footer.vue";
 
 export default {
   components: {
-    Nav
+    Nav,
+    Footer
   },
   data() {
-    return{
-      loginModalActive: false,
-      registerModalActive: false
-    }
-  }
-}
+    return {};
+  },
+  methods: {}
+};
 </script>
 
-<style scoped lang="scss">
-  .modal-container{
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    width: 400px;
-    margin: 0 auto;
+<style lang="scss">
+.modal-container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 400px;
+  margin: 0 auto;
+}
+.breadcrumb a,
+.breadcrumb a:hover {
+  color: $white;
+}
+.welcome .title {
+  font-size: 4rem;
+}
+.welcome .subtitle {
+  font-size: 1.5rem;
+}
+.image.comp img {
+  max-width: 500px;
+  float: right;
+}
+.text {
+  align-self: center;
+}
+@media only screen and (max-width: 769px) {
+  .image.comp img {
+    padding: 0px 50px;
   }
-  .welcome .title{
-    font-size: 4rem;
-  }
-  .welcome .subtitle{
-    font-size: 1.5rem;
-  }
-  .image.comp img{
-    max-width: 500px;
-    float: right;
-  }
-  .text{
-    align-self: center;
-  }
-  @media only screen and (max-width: 769px) {
-    .image.comp img {
-      padding: 0px 50px;
-    }
-  }
-
+}
 </style>
