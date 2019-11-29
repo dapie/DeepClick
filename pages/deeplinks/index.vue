@@ -341,4 +341,22 @@ export default {
   width: 500px;
   margin: 0 auto;
 }
+@media only screen and (max-width: 500px) {
+  .box {
+    width: 100%;
+    margin: 0;
+    box-shadow: none;
+  }
+  .modal {
+    display: block !important;
+    background: #fff;
+  }
+  .modal-container{
+    margin: 0;
+    max-height: none;
+    display: block;
+    width: 100%;
+    margin: 0;
+  }
+}
 </style>
