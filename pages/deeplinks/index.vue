@@ -17,7 +17,7 @@
         </div>
       </div>
     </section>
-    <div class="container">
+    <div class="container table-container">
       <table class="table is-fullwidth">
         <thead>
           <tr>
@@ -342,21 +342,22 @@ export default {
   margin: 0 auto;
 }
 @media only screen and (max-width: 500px) {
-  .box {
-    width: 100%;
-    margin: 0;
-    box-shadow: none;
+  .table-container{
+    overflow: auto;
   }
-  .modal {
-    display: block !important;
-    background: #fff;
-  }
-  .modal-container{
-    margin: 0;
+  .modal-content{
     max-height: none;
+  }
+  .modal .modal-container{
     display: block;
+    margin-top:72px;
     width: 100%;
-    margin: 0;
+    transition: all .3s ease-in;
+    animation: .5s ease-in-out move_eye;
+  }
+  @keyframes move_eye { 
+    from { margin-top:100vh; opacity: 0;} 
+    to { margin-top:72px; opacity: 1;}  
   }
 }
 </style>
