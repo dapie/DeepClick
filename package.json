@@ -24,7 +24,7 @@
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
     "jsonwebtoken": "^8.5.1",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
     "realm": "^3.3.0",
